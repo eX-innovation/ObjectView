@@ -8,12 +8,79 @@
 
 /* Begin PBXBuildFile section */
 		4C4D286F22149F8800A8E18F /* ObjectView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4D286D22149F8800A8E18F /* ObjectView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4C4D28C12214A03800A8E18F /* OVControllerModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D289D2214A03700A8E18F /* OVControllerModelProtocol.swift */; };
+		4C4D28C22214A03800A8E18F /* OVControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D289E2214A03700A8E18F /* OVControllerModel.swift */; };
+		4C4D28C32214A03800A8E18F /* OVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D289F2214A03700A8E18F /* OVController.swift */; };
+		4C4D28C42214A03800A8E18F /* OVActionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28A22214A03800A8E18F /* OVActionCellModel.swift */; };
+		4C4D28C52214A03800A8E18F /* OVActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28A32214A03800A8E18F /* OVActionCell.swift */; };
+		4C4D28C62214A03800A8E18F /* OVActionCellModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28A42214A03800A8E18F /* OVActionCellModelProtocol.swift */; };
+		4C4D28C72214A03800A8E18F /* OVMultiForwardCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28A72214A03800A8E18F /* OVMultiForwardCellModel.swift */; };
+		4C4D28C82214A03800A8E18F /* OVForwardCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28A82214A03800A8E18F /* OVForwardCellModel.swift */; };
+		4C4D28C92214A03800A8E18F /* OVForwardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28A92214A03800A8E18F /* OVForwardCell.swift */; };
+		4C4D28CA2214A03800A8E18F /* OVForwardCellModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28AA2214A03800A8E18F /* OVForwardCellModelProtocol.swift */; };
+		4C4D28CB2214A03800A8E18F /* OVPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28AC2214A03800A8E18F /* OVPickerCell.swift */; };
+		4C4D28CC2214A03800A8E18F /* OVPickerCellModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28AD2214A03800A8E18F /* OVPickerCellModelProtocol.swift */; };
+		4C4D28CD2214A03800A8E18F /* OVPickerCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28AE2214A03800A8E18F /* OVPickerCellModel.swift */; };
+		4C4D28CE2214A03800A8E18F /* OVSwitchCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28B02214A03800A8E18F /* OVSwitchCellModel.swift */; };
+		4C4D28CF2214A03800A8E18F /* OVSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28B12214A03800A8E18F /* OVSwitchCell.swift */; };
+		4C4D28D02214A03800A8E18F /* OVSwitchCellModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28B22214A03800A8E18F /* OVSwitchCellModelProtocol.swift */; };
+		4C4D28D12214A03800A8E18F /* OVValueCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28B42214A03800A8E18F /* OVValueCellModel.swift */; };
+		4C4D28D22214A03800A8E18F /* OVTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28B52214A03800A8E18F /* OVTextFieldCell.swift */; };
+		4C4D28D32214A03800A8E18F /* OVValueCellModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28B62214A03800A8E18F /* OVValueCellModelProtocol.swift */; };
+		4C4D28D42214A03800A8E18F /* OVCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28B72214A03800A8E18F /* OVCellProtocol.swift */; };
+		4C4D28D52214A03800A8E18F /* OVCellModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28B82214A03800A8E18F /* OVCellModelProtocol.swift */; };
+		4C4D28D62214A03800A8E18F /* OVObjectSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28BA2214A03800A8E18F /* OVObjectSectionModel.swift */; };
+		4C4D28D72214A03800A8E18F /* OVDictionarySectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28BB2214A03800A8E18F /* OVDictionarySectionModel.swift */; };
+		4C4D28D82214A03800A8E18F /* OVSectionModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28BC2214A03800A8E18F /* OVSectionModelProtocol.swift */; };
+		4C4D28D92214A03800A8E18F /* OVArraySectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28BD2214A03800A8E18F /* OVArraySectionModel.swift */; };
+		4C4D28DA2214A03800A8E18F /* OVKeyPathWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28BE2214A03800A8E18F /* OVKeyPathWrapper.swift */; };
+		4C4D28DB2214A03800A8E18F /* OVEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28BF2214A03800A8E18F /* OVEnum.swift */; };
+		4C4D28DC2214A03800A8E18F /* OVResolvePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D28C02214A03800A8E18F /* OVResolvePlaceholder.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4C4D289A2214A00000A8E18F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C4D289622149FFE00A8E18F /* ObjectView_example.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C4D288122149FFD00A8E18F;
+			remoteInfo = ObjectView_example;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4C4D286A22149F8800A8E18F /* ObjectView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C4D286D22149F8800A8E18F /* ObjectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectView.h; sourceTree = "<group>"; };
 		4C4D286E22149F8800A8E18F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C4D289622149FFE00A8E18F /* ObjectView_example.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectView_example.xcodeproj; path = ObjectView_example/ObjectView_example.xcodeproj; sourceTree = "<group>"; };
+		4C4D289D2214A03700A8E18F /* OVControllerModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVControllerModelProtocol.swift; sourceTree = "<group>"; };
+		4C4D289E2214A03700A8E18F /* OVControllerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVControllerModel.swift; sourceTree = "<group>"; };
+		4C4D289F2214A03700A8E18F /* OVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVController.swift; sourceTree = "<group>"; };
+		4C4D28A22214A03800A8E18F /* OVActionCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVActionCellModel.swift; sourceTree = "<group>"; };
+		4C4D28A32214A03800A8E18F /* OVActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVActionCell.swift; sourceTree = "<group>"; };
+		4C4D28A42214A03800A8E18F /* OVActionCellModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVActionCellModelProtocol.swift; sourceTree = "<group>"; };
+		4C4D28A72214A03800A8E18F /* OVMultiForwardCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVMultiForwardCellModel.swift; sourceTree = "<group>"; };
+		4C4D28A82214A03800A8E18F /* OVForwardCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVForwardCellModel.swift; sourceTree = "<group>"; };
+		4C4D28A92214A03800A8E18F /* OVForwardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVForwardCell.swift; sourceTree = "<group>"; };
+		4C4D28AA2214A03800A8E18F /* OVForwardCellModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVForwardCellModelProtocol.swift; sourceTree = "<group>"; };
+		4C4D28AC2214A03800A8E18F /* OVPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVPickerCell.swift; sourceTree = "<group>"; };
+		4C4D28AD2214A03800A8E18F /* OVPickerCellModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVPickerCellModelProtocol.swift; sourceTree = "<group>"; };
+		4C4D28AE2214A03800A8E18F /* OVPickerCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVPickerCellModel.swift; sourceTree = "<group>"; };
+		4C4D28B02214A03800A8E18F /* OVSwitchCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVSwitchCellModel.swift; sourceTree = "<group>"; };
+		4C4D28B12214A03800A8E18F /* OVSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVSwitchCell.swift; sourceTree = "<group>"; };
+		4C4D28B22214A03800A8E18F /* OVSwitchCellModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVSwitchCellModelProtocol.swift; sourceTree = "<group>"; };
+		4C4D28B42214A03800A8E18F /* OVValueCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVValueCellModel.swift; sourceTree = "<group>"; };
+		4C4D28B52214A03800A8E18F /* OVTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVTextFieldCell.swift; sourceTree = "<group>"; };
+		4C4D28B62214A03800A8E18F /* OVValueCellModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVValueCellModelProtocol.swift; sourceTree = "<group>"; };
+		4C4D28B72214A03800A8E18F /* OVCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVCellProtocol.swift; sourceTree = "<group>"; };
+		4C4D28B82214A03800A8E18F /* OVCellModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVCellModelProtocol.swift; sourceTree = "<group>"; };
+		4C4D28BA2214A03800A8E18F /* OVObjectSectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVObjectSectionModel.swift; sourceTree = "<group>"; };
+		4C4D28BB2214A03800A8E18F /* OVDictionarySectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVDictionarySectionModel.swift; sourceTree = "<group>"; };
+		4C4D28BC2214A03800A8E18F /* OVSectionModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVSectionModelProtocol.swift; sourceTree = "<group>"; };
+		4C4D28BD2214A03800A8E18F /* OVArraySectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVArraySectionModel.swift; sourceTree = "<group>"; };
+		4C4D28BE2214A03800A8E18F /* OVKeyPathWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVKeyPathWrapper.swift; sourceTree = "<group>"; };
+		4C4D28BF2214A03800A8E18F /* OVEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVEnum.swift; sourceTree = "<group>"; };
+		4C4D28C02214A03800A8E18F /* OVResolvePlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVResolvePlaceholder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +97,9 @@
 		4C4D286022149F8800A8E18F = {
 			isa = PBXGroup;
 			children = (
+				4C4D287722149FE100A8E18F /* iOS_example */,
+				4C4D287622149F9900A8E18F /* Frameworks */,
+				4C4D287522149F9000A8E18F /* Sources */,
 				4C4D286C22149F8800A8E18F /* ObjectView */,
 				4C4D286B22149F8800A8E18F /* Products */,
 			);
@@ -50,6 +120,136 @@
 				4C4D286E22149F8800A8E18F /* Info.plist */,
 			);
 			path = ObjectView;
+			sourceTree = "<group>";
+		};
+		4C4D287522149F9000A8E18F /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				4C4D28A02214A03800A8E18F /* Cell */,
+				4C4D289C2214A03700A8E18F /* Controller */,
+				4C4D28BF2214A03800A8E18F /* OVEnum.swift */,
+				4C4D28BE2214A03800A8E18F /* OVKeyPathWrapper.swift */,
+				4C4D28C02214A03800A8E18F /* OVResolvePlaceholder.swift */,
+				4C4D28B92214A03800A8E18F /* Section */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		4C4D287622149F9900A8E18F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		4C4D287722149FE100A8E18F /* iOS_example */ = {
+			isa = PBXGroup;
+			children = (
+				4C4D289622149FFE00A8E18F /* ObjectView_example.xcodeproj */,
+			);
+			path = iOS_example;
+			sourceTree = "<group>";
+		};
+		4C4D289722149FFE00A8E18F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C4D289B2214A00000A8E18F /* ObjectView_example.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C4D289C2214A03700A8E18F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4C4D289D2214A03700A8E18F /* OVControllerModelProtocol.swift */,
+				4C4D289E2214A03700A8E18F /* OVControllerModel.swift */,
+				4C4D289F2214A03700A8E18F /* OVController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4C4D28A02214A03800A8E18F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4C4D28A12214A03800A8E18F /* OVActionCell */,
+				4C4D28A52214A03800A8E18F /* ForwardCell */,
+				4C4D28AB2214A03800A8E18F /* PickerCell */,
+				4C4D28AF2214A03800A8E18F /* SwitchCell */,
+				4C4D28B32214A03800A8E18F /* ValueCell */,
+				4C4D28B72214A03800A8E18F /* OVCellProtocol.swift */,
+				4C4D28B82214A03800A8E18F /* OVCellModelProtocol.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		4C4D28A12214A03800A8E18F /* OVActionCell */ = {
+			isa = PBXGroup;
+			children = (
+				4C4D28A22214A03800A8E18F /* OVActionCellModel.swift */,
+				4C4D28A32214A03800A8E18F /* OVActionCell.swift */,
+				4C4D28A42214A03800A8E18F /* OVActionCellModelProtocol.swift */,
+			);
+			path = OVActionCell;
+			sourceTree = "<group>";
+		};
+		4C4D28A52214A03800A8E18F /* ForwardCell */ = {
+			isa = PBXGroup;
+			children = (
+				4C4D28A62214A03800A8E18F /* MultiForwardCell */,
+				4C4D28A82214A03800A8E18F /* OVForwardCellModel.swift */,
+				4C4D28A92214A03800A8E18F /* OVForwardCell.swift */,
+				4C4D28AA2214A03800A8E18F /* OVForwardCellModelProtocol.swift */,
+			);
+			path = ForwardCell;
+			sourceTree = "<group>";
+		};
+		4C4D28A62214A03800A8E18F /* MultiForwardCell */ = {
+			isa = PBXGroup;
+			children = (
+				4C4D28A72214A03800A8E18F /* OVMultiForwardCellModel.swift */,
+			);
+			path = MultiForwardCell;
+			sourceTree = "<group>";
+		};
+		4C4D28AB2214A03800A8E18F /* PickerCell */ = {
+			isa = PBXGroup;
+			children = (
+				4C4D28AC2214A03800A8E18F /* OVPickerCell.swift */,
+				4C4D28AD2214A03800A8E18F /* OVPickerCellModelProtocol.swift */,
+				4C4D28AE2214A03800A8E18F /* OVPickerCellModel.swift */,
+			);
+			path = PickerCell;
+			sourceTree = "<group>";
+		};
+		4C4D28AF2214A03800A8E18F /* SwitchCell */ = {
+			isa = PBXGroup;
+			children = (
+				4C4D28B02214A03800A8E18F /* OVSwitchCellModel.swift */,
+				4C4D28B12214A03800A8E18F /* OVSwitchCell.swift */,
+				4C4D28B22214A03800A8E18F /* OVSwitchCellModelProtocol.swift */,
+			);
+			path = SwitchCell;
+			sourceTree = "<group>";
+		};
+		4C4D28B32214A03800A8E18F /* ValueCell */ = {
+			isa = PBXGroup;
+			children = (
+				4C4D28B42214A03800A8E18F /* OVValueCellModel.swift */,
+				4C4D28B52214A03800A8E18F /* OVTextFieldCell.swift */,
+				4C4D28B62214A03800A8E18F /* OVValueCellModelProtocol.swift */,
+			);
+			path = ValueCell;
+			sourceTree = "<group>";
+		};
+		4C4D28B92214A03800A8E18F /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				4C4D28BA2214A03800A8E18F /* OVObjectSectionModel.swift */,
+				4C4D28BB2214A03800A8E18F /* OVDictionarySectionModel.swift */,
+				4C4D28BC2214A03800A8E18F /* OVSectionModelProtocol.swift */,
+				4C4D28BD2214A03800A8E18F /* OVArraySectionModel.swift */,
+			);
+			path = Section;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,6 +295,7 @@
 				TargetAttributes = {
 					4C4D286922149F8800A8E18F = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -108,12 +309,28 @@
 			mainGroup = 4C4D286022149F8800A8E18F;
 			productRefGroup = 4C4D286B22149F8800A8E18F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4C4D289722149FFE00A8E18F /* Products */;
+					ProjectRef = 4C4D289622149FFE00A8E18F /* ObjectView_example.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				4C4D286922149F8800A8E18F /* ObjectView */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4C4D289B2214A00000A8E18F /* ObjectView_example.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ObjectView_example.app;
+			remoteRef = 4C4D289A2214A00000A8E18F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4C4D286822149F8800A8E18F /* Resources */ = {
@@ -130,6 +347,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C4D28D12214A03800A8E18F /* OVValueCellModel.swift in Sources */,
+				4C4D28C92214A03800A8E18F /* OVForwardCell.swift in Sources */,
+				4C4D28D42214A03800A8E18F /* OVCellProtocol.swift in Sources */,
+				4C4D28DB2214A03800A8E18F /* OVEnum.swift in Sources */,
+				4C4D28DA2214A03800A8E18F /* OVKeyPathWrapper.swift in Sources */,
+				4C4D28C22214A03800A8E18F /* OVControllerModel.swift in Sources */,
+				4C4D28CF2214A03800A8E18F /* OVSwitchCell.swift in Sources */,
+				4C4D28C12214A03800A8E18F /* OVControllerModelProtocol.swift in Sources */,
+				4C4D28D02214A03800A8E18F /* OVSwitchCellModelProtocol.swift in Sources */,
+				4C4D28C72214A03800A8E18F /* OVMultiForwardCellModel.swift in Sources */,
+				4C4D28CE2214A03800A8E18F /* OVSwitchCellModel.swift in Sources */,
+				4C4D28C52214A03800A8E18F /* OVActionCell.swift in Sources */,
+				4C4D28C42214A03800A8E18F /* OVActionCellModel.swift in Sources */,
+				4C4D28DC2214A03800A8E18F /* OVResolvePlaceholder.swift in Sources */,
+				4C4D28D62214A03800A8E18F /* OVObjectSectionModel.swift in Sources */,
+				4C4D28D22214A03800A8E18F /* OVTextFieldCell.swift in Sources */,
+				4C4D28D32214A03800A8E18F /* OVValueCellModelProtocol.swift in Sources */,
+				4C4D28D52214A03800A8E18F /* OVCellModelProtocol.swift in Sources */,
+				4C4D28CD2214A03800A8E18F /* OVPickerCellModel.swift in Sources */,
+				4C4D28CA2214A03800A8E18F /* OVForwardCellModelProtocol.swift in Sources */,
+				4C4D28CB2214A03800A8E18F /* OVPickerCell.swift in Sources */,
+				4C4D28CC2214A03800A8E18F /* OVPickerCellModelProtocol.swift in Sources */,
+				4C4D28C62214A03800A8E18F /* OVActionCellModelProtocol.swift in Sources */,
+				4C4D28D82214A03800A8E18F /* OVSectionModelProtocol.swift in Sources */,
+				4C4D28C82214A03800A8E18F /* OVForwardCellModel.swift in Sources */,
+				4C4D28D72214A03800A8E18F /* OVDictionarySectionModel.swift in Sources */,
+				4C4D28D92214A03800A8E18F /* OVArraySectionModel.swift in Sources */,
+				4C4D28C32214A03800A8E18F /* OVController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,10 +506,11 @@
 		4C4D287322149F8800A8E18F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 26C4F4D2DU;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -277,7 +523,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.eX.ObjectView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -286,10 +534,11 @@
 		4C4D287422149F8800A8E18F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 26C4F4D2DU;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -302,6 +551,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.eX.ObjectView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
