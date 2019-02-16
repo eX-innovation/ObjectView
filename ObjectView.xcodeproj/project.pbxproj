@@ -81,6 +81,7 @@
 		4C4D28BE2214A03800A8E18F /* OVKeyPathWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVKeyPathWrapper.swift; sourceTree = "<group>"; };
 		4C4D28BF2214A03800A8E18F /* OVEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVEnum.swift; sourceTree = "<group>"; };
 		4C4D28C02214A03800A8E18F /* OVResolvePlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OVResolvePlaceholder.swift; sourceTree = "<group>"; };
+		4C4D313F22180D7600A8E18F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +98,7 @@
 		4C4D286022149F8800A8E18F = {
 			isa = PBXGroup;
 			children = (
+				4C4D313F22180D7600A8E18F /* README.md */,
 				4C4D287722149FE100A8E18F /* iOS_example */,
 				4C4D287622149F9900A8E18F /* Frameworks */,
 				4C4D287522149F9000A8E18F /* Sources */,
