@@ -10,21 +10,25 @@ import Foundation
 
 public protocol OVSectionModelProtocol {
     
-    func getSectionType() -> OVSectionType
+    var sectionType: OVSectionType { get }
     
-    func getCellCount() -> Int
+    var header: String? { get }
+    var footer: String? { get }
+    
+    var cellCount: Int { get }
+    
     func getCell(_ row: Int) -> OVCellModelProtocol
     
-    func getHeader() -> String?
-    func getFooter() -> String?
-    
-    func update()
+    func updateAll()
     
     // Array Specific
+    // ----------------------------
+    
     var movable: Bool { get }
     var removable: Bool { get }
     var keepOne: Bool { get }
     var addable: Bool { get }
+    
     // Move object in Array
     func moveObject(from: Int, to: Int)
     func removeObject(at: Int)
@@ -32,6 +36,12 @@ public protocol OVSectionModelProtocol {
 }
 
 extension OVSectionModelProtocol {
+    
+    public var movable: Bool { return false }
+    public var removable: Bool { return false }
+    public var keepOne: Bool { return false }
+    public var addable: Bool { return false }
+    
     public func moveObject(from: Int, to: Int) { }
     public func removeObject(at: Int) {}
     public func addObject(at: Int) {}

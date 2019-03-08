@@ -11,6 +11,7 @@ import Foundation
 public enum OVSectionType {
     case Object
     case Array
+    case Dictionary
 }
 
 public enum OVCellType: String {
@@ -53,3 +54,50 @@ extension KeyPathSelfProtocol {
 }
 
 extension String : KeyPathSelfProtocol {}
+
+#if !canImport(Essential)
+
+// Theme Management
+
+/*
+
+public protocol ExStyleTableViewCell {
+ 
+    func setupColor()
+}
+
+public extension ExStyleTableViewCell where Self: UITableViewCell {
+    func setupColor() {
+        // ...
+    }
+}
+
+public protocol ExStyleTableViewController {
+    
+    func setTitle(_ title: String)
+    func setupColor()
+    func dynamicRowHeight()
+    func removeFooterLines()
+}
+
+public extension ExStyleTableViewController where Self: UITableViewController {
+    func setupColor() {
+        // ...
+    }
+    
+    func removeFooterLines() {
+        tableView.tableFooterView = UIView()
+    }
+    
+    func setTitle(_ title: String) {
+        self.navigationItem.title = title
+    }
+    
+    func dynamicRowHeight() {
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+}
+
+ */
+#endif

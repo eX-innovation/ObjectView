@@ -10,15 +10,17 @@ import Foundation
 
 public class OVDictionarySectionModel<ObjectType, KeyType: Hashable, ValueType>: OVSectionModelProtocol {
     
+    /// Properties
+    public let sectionType: OVSectionType = .Dictionary
+    
     public var object: ObjectType
     
-    private let placeholderResolver: OVResolvePlaceholder<ObjectType>
-    public let _header: () -> Any
-    public let _footer: () -> Any
+    private let _header: () -> Any
+    private let _footer: () -> Any
     
-    public let movable: Bool = false
+    public let movable: Bool = false // Not supported by Dict
     public let removable: Bool
-    public var keepOne: Bool = false
+    public let keepOne: Bool
     public let addable: Bool
     
     public let path: ReferenceWritableKeyPath<ObjectType, Dictionary<KeyType, ValueType>>
@@ -33,18 +35,18 @@ public class OVDictionarySectionModel<ObjectType, KeyType: Hashable, ValueType>:
         _ object: ObjectType,
         header: @escaping @autoclosure () -> Any = "",
         footer: @escaping @autoclosure () -> Any = "",
-        removable: Bool = false,
-        placeholder: Dictionary<String, PartialKeyPath<ObjectType>> = [:],
+        removable: Bool = true,
+        keepOne: Bool = false,
         path: ReferenceWritableKeyPath<ObjectType, Dictionary<KeyType, ValueType>>,
         cellFactory: @escaping (Int, KeyType, ValueType) -> (OVCellModelProtocol),
         objectFactory: ((Int, ()->(KeyType, ValueType)) -> ())? = nil) {
         
         self.object = object
         
-        self.placeholderResolver = OVResolvePlaceholder(placeholder, object)
         self._header = header
         self._footer = footer
         
+        self.keepOne = keepOne
         self.removable = removable
         self.addable = objectFactory != nil
         
@@ -53,6 +55,36 @@ public class OVDictionarySectionModel<ObjectType, KeyType: Hashable, ValueType>:
         self.cellFactory = cellFactory
         self.objectFactory = objectFactory
         
+        setupCellModels()
+    }
+    
+    /// Computed properties
+    public var header: String? {
+        let str = "\(_header())"
+        
+        if str == "" {
+            return nil
+        }
+        
+        return str
+    }
+    
+    public var footer: String? {
+        let str = "\(_footer())"
+        
+        if str == "" {
+            return nil
+        }
+        
+        return str
+    }
+    
+    public var cellCount: Int {
+        return cells.count
+    }
+    
+    /// Methods
+    public func updateAll() {
         setupCellModels()
     }
     
@@ -75,41 +107,11 @@ public class OVDictionarySectionModel<ObjectType, KeyType: Hashable, ValueType>:
         }
     }
     
-    public func update() {
-        
-    }
-    
-    public func getCellCount() -> Int {
-        return cells.count
-    }
-    
     public func getCell(_ row: Int) -> OVCellModelProtocol {
         return cells[row]
     }
     
-    public func getHeader() -> String? {
-        let str = "\(_header())"
-        
-        if str == "" {
-            return nil
-        }
-        
-        return String(placeholderResolver.resolve(str))
-    }
-    
-    public func getFooter() -> String? {
-        let str = "\(_footer())"
-        
-        if str == "" {
-            return nil
-        }
-        
-        return String(placeholderResolver.resolve(str))
-    }
-    
-    public func getSectionType() -> OVSectionType {
-        return .Array
-    }
+    // Dictionary specific
     
     public func removeObject(at: Int) {
         let key = cellKeys[at]

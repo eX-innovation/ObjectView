@@ -40,6 +40,7 @@ internal class OVSwitchCell: UITableViewCell, OVCellProtocol, ExStyleTableViewCe
         }
         
         self.model = m
+        self.model.connectedCell = self
         
         setupCell()
         updateCell()

@@ -40,15 +40,16 @@ class OVForwardCell: UITableViewCell, OVCellProtocol, ExStyleTableViewCell {
         }
         
         self.model = m
+        self.model.connectedCell = self
         
-        self.model.statusUpdate = { [weak self] status, spinner in
+        self.model.statusUpdate = { [weak self] title, subtitle, spinner in
             guard let s = self else {
                 return
             }
             
             DispatchQueue.main.async {
                 if spinner {
-                    s.showSpinner(status)
+                    s.showSpinner(title, subtitle: subtitle)
                 } else {
                     s.hideSpinner()
                 }
@@ -62,7 +63,7 @@ class OVForwardCell: UITableViewCell, OVCellProtocol, ExStyleTableViewCell {
         setupCell()
     }
     
-    private func showSpinner(_ status: String?) {
+    private func showSpinner(_ title: String?, subtitle: String?) {
         if activityIndicatorView == nil {
             activityIndicatorView = UIActivityIndicatorView(style: .white)
         }
@@ -72,11 +73,8 @@ class OVForwardCell: UITableViewCell, OVCellProtocol, ExStyleTableViewCell {
         self.accessoryType = .none
         self.accessoryView = activityIndicatorView
         
-        if status != nil {
-            self.textLabel?.text = status!
-        } else {
-            self.textLabel?.text = model.title
-        }
+        self.textLabel?.text = title ?? model.title
+        self.detailTextLabel?.text = subtitle ?? model.subtitle
     }
     
     private func hideSpinner() {

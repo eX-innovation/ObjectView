@@ -9,14 +9,16 @@
 import Foundation
 
 public protocol OVControllerModelProtocol {
+    var onAppear: (()->())? { get }
+    var onDisappear: (()->())? { get }
     
     var title: String { get }
     
-    func getSectionCount() -> Int
+    func updateAll()
     
+    func bindView(_ updateView: @escaping (()->()))
+    
+    func getSectionCount() -> Int
     func getSection(_ sec: Int) -> OVSectionModelProtocol
     func getSections() -> Array<OVSectionModelProtocol>
-    
-    var onAppear: (()->())? { get }
-    var onDisappear: (()->())? { get }
 }

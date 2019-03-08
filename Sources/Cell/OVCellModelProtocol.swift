@@ -6,12 +6,18 @@
 //  Copyright © 2019 Michael Mayerhofer. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 public protocol OVCellModelProtocol {
+    
+    var cellType: OVCellType { get }
+    
     var title: String { get }
     var subtitle: String { get }
     
-    var cellType: OVCellType { get }
+    /// Reference to cell
+    var connectedCell: OVCellProtocol? { get set }
+    
+    /// This call will tell the model and the cell to update
+    func updateAll()
 }

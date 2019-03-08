@@ -10,11 +10,15 @@ import Foundation
 
 public class OVArraySectionModel<ObjectType, ValueType>: OVSectionModelProtocol {
     
+    /// Properties
+    public let sectionType: OVSectionType = .Array
+    
     public var object: ObjectType
     
-    private let placeholderResolver: OVResolvePlaceholder<ObjectType>
     public let _header: () -> Any
     public let _footer: () -> Any
+    
+    private let onUpdate: (()->())?
     
     public let movable: Bool
     public let removable: Bool
@@ -31,19 +35,20 @@ public class OVArraySectionModel<ObjectType, ValueType>: OVSectionModelProtocol 
         _ object: ObjectType,
         header: @escaping @autoclosure () -> Any = "",
         footer: @escaping @autoclosure () -> Any = "",
+        onUpdate: (()->())? = nil,
         movable: Bool = false,
         removable: Bool = false,
         keepOne: Bool = false,
-        placeholder: Dictionary<String, PartialKeyPath<ObjectType>> = [:],
         path: ReferenceWritableKeyPath<ObjectType, Array<ValueType>>,
         cellFactory: @escaping (Int, ValueType) -> (OVCellModelProtocol),
         objectFactory: ((Int) -> (ValueType))? = nil) {
         
         self.object = object
         
-        self.placeholderResolver = OVResolvePlaceholder(placeholder, object)
         self._header = header
         self._footer = footer
+        
+        self.onUpdate = onUpdate
         
         self.movable = movable
         self.removable = removable
@@ -55,6 +60,36 @@ public class OVArraySectionModel<ObjectType, ValueType>: OVSectionModelProtocol 
         self.cellFactory = cellFactory
         self.objectFactory = objectFactory
         
+        setupCellModels()
+    }
+    
+    /// Computed properties
+    public var header: String? {
+        let str = "\(_header())"
+        
+        if str == "" {
+            return nil
+        }
+        
+        return str
+    }
+    
+    public var footer: String? {
+        let str = "\(_footer())"
+        
+        if str == "" {
+            return nil
+        }
+        
+        return str
+    }
+    
+    public var cellCount: Int {
+        return cells.count
+    }
+    
+    /// Methods
+    public func updateAll() {
         setupCellModels()
     }
     
@@ -75,50 +110,24 @@ public class OVArraySectionModel<ObjectType, ValueType>: OVSectionModelProtocol 
         }
     }
     
-    public func update() {
-        setupCellModels()
-    }
-    
-    public func getCellCount() -> Int {
-        return cells.count
-    }
-    
     public func getCell(_ row: Int) -> OVCellModelProtocol {
         return cells[row]
     }
     
-    public func getHeader() -> String? {
-        let str = "\(_header())"
-        
-        if str == "" {
-            return nil
-        }
-        
-        return String(placeholderResolver.resolve(str))
-    }
-    
-    public func getFooter() -> String? {
-        let str = "\(_footer())"
-        
-        if str == "" {
-            return nil
-        }
-        
-        return String(placeholderResolver.resolve(str))
-    }
-    
-    public func getSectionType() -> OVSectionType {
-        return .Array
-    }
+    // Array speicific
     
     public func moveObject(from: Int, to: Int) {
         object[keyPath: path].move(from: from, to: to)
         setupCellModels()
+        
+        onUpdate?()
     }
     
     public func removeObject(at: Int) {
         object[keyPath: path].remove(at: at)
         setupCellModels()
+        
+        onUpdate?()
     }
     
     public func addObject(at: Int) {
@@ -130,5 +139,7 @@ public class OVArraySectionModel<ObjectType, ValueType>: OVSectionModelProtocol 
         
         object[keyPath: path].append(new)
         setupCellModels()
+        
+        onUpdate?()
     }
 }

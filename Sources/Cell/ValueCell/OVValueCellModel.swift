@@ -11,21 +11,15 @@ import UIKit
 
 public class OVValueCellModel<ObjectType, ValueType>: OVValueCellModelProtocol {
     
+    ///Properties
     public let cellType: OVCellType = .TextFieldCell
     
     public let object: ObjectType
     
-    private let placeholderResolver: OVResolvePlaceholder<ObjectType>
-    
     private let _title: () -> Any
-    public var title: String {
-        return placeholderResolver.resolve("\(_title())")
-    }
-    
     private let _subtitle: () -> Any
-    public var subtitle: String {
-        return placeholderResolver.resolve("\(_subtitle())")
-    }
+    
+    private let onUpdate: (()->())?
     
     internal let pickerValues: (() -> (Array<String>))?
     internal private(set) var keyboardType: UIKeyboardType = .default
@@ -34,20 +28,27 @@ public class OVValueCellModel<ObjectType, ValueType>: OVValueCellModelProtocol {
     
     internal let keyPathWrapper: OVKeyPathWrapper<ObjectType, ValueType>
     
+    var _value: String = ""
+    
+    /// Reference to cell
+    public var connectedCell: OVCellProtocol?
+    
+    /// Constructor
     public init(
         _ object: ObjectType,
         _ path: ReferenceWritableKeyPath<ObjectType, ValueType>,
         _ title: @escaping @autoclosure () -> Any,
         subtitle: @escaping @autoclosure () -> Any = "",
-        placeholder: Dictionary<String, PartialKeyPath<ObjectType>> = [:],
+        onUpdate: (()->())? = nil,
         allowCustomInput: Bool = true,
         pickerValues: (() -> (Array<String>))? = nil) {
         
         self.object = object
         
-        self.placeholderResolver = OVResolvePlaceholder(placeholder, object)
         self._title = title
         self._subtitle = subtitle
+        
+        self.onUpdate = onUpdate
         
         self.keyPathWrapper = OVKeyPathWrapper(path)
         self.keyPathWrapper.setObject(object)
@@ -59,7 +60,34 @@ public class OVValueCellModel<ObjectType, ValueType>: OVValueCellModelProtocol {
         keyboardType = selectKeyboardType(ValueType.self)
     }
     
-    func selectKeyboardType<ValueType>(_ type: ValueType.Type) -> UIKeyboardType {
+    /// Computed properties
+    public var title: String {
+        return "\(_title())"
+    }
+    
+    public var subtitle: String {
+        return "\(_subtitle())"
+    }
+    
+    internal var value: String {
+        set {
+            _value = newValue
+            self.keyPathWrapper.setStringValue(_value)
+            onUpdate?()
+        }
+        
+        get {
+            _value = self.keyPathWrapper.getStringValue() ?? "Error"
+            return _value
+        }
+    }
+    
+    /// Methods
+    public func updateAll() {
+        connectedCell?.update()
+    }
+    
+    private func selectKeyboardType<ValueType>(_ type: ValueType.Type) -> UIKeyboardType {
         switch ValueType.self {
         case is String.Type:
             return .asciiCapable
@@ -69,20 +97,6 @@ public class OVValueCellModel<ObjectType, ValueType>: OVValueCellModelProtocol {
             return .decimalPad
         default:
             return .default
-        }
-    }
-    
-    var _value: String = ""
-    
-    var value: String {
-        set {
-            _value = newValue
-            self.keyPathWrapper.setStringValue(_value)
-        }
-        
-        get {
-            _value = self.keyPathWrapper.getStringValue() ?? "Error"
-            return _value
         }
     }
 }

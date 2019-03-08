@@ -10,16 +10,13 @@ import Foundation
 
 public class OVObjectSectionModel<ObjectType>: OVSectionModelProtocol {
     
+    /// Properties
+    public let sectionType: OVSectionType = .Object
+    
     public var object: ObjectType
     
-    private let placeholderResolver: OVResolvePlaceholder<ObjectType>
-    public let _header: () -> Any
-    public let _footer: () -> Any
-    
-    public let movable: Bool = false
-    public let removable: Bool = false
-    public let keepOne: Bool = false
-    public let addable: Bool = false
+    private let _header: () -> Any
+    private let _footer: () -> Any
     
     public let cells: Array<OVCellModelProtocol>
     
@@ -27,51 +24,49 @@ public class OVObjectSectionModel<ObjectType>: OVSectionModelProtocol {
         _ object: ObjectType,
         header: @escaping @autoclosure () -> Any = "",
         footer: @escaping @autoclosure () -> Any = "",
-        placeholder: Dictionary<String, PartialKeyPath<ObjectType>> = [:],
         cells: Array<OVCellModelProtocol>) {
         
         self.object = object
         
-        self.placeholderResolver = OVResolvePlaceholder(placeholder, object)
         self._header = header
         self._footer = footer
         
         self.cells = cells
     }
     
-    public func update() {
-        
-    }
-    
-    public func getCellCount() -> Int {
-        return cells.count
-    }
-    
-    public func getCell(_ row: Int) -> OVCellModelProtocol {
-        return cells[row]
-    }
-    
-    public func getHeader() -> String? {
+    /// Computed properties
+    public var header: String? {
         let str = "\(_header())"
         
         if str == "" {
             return nil
         }
         
-        return String(placeholderResolver.resolve(str))
+        return str
     }
     
-    public func getFooter() -> String? {
+    public var footer: String? {
         let str = "\(_footer())"
         
         if str == "" {
             return nil
         }
         
-        return String(placeholderResolver.resolve(str))
+        return str
     }
     
-    public func getSectionType() -> OVSectionType {
-        return .Object
+    public var cellCount: Int {
+        return cells.count
+    }
+    
+    /// Methods
+    public func updateAll() {
+        for cell in cells {
+            cell.updateAll()
+        }
+    }
+    
+    public func getCell(_ row: Int) -> OVCellModelProtocol {
+        return cells[row]
     }
 }

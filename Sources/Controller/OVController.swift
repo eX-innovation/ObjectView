@@ -21,6 +21,8 @@ class OVController: UITableViewController, ExStyleTableViewController {
         
         super.init(style: .grouped)
         
+        bindToModel()
+        
         self.tableView.register(OVTextFieldCell.self, forCellReuseIdentifier: OVCellType.TextFieldCell.rawValue)
         self.tableView.register(OVSwitchCell.self, forCellReuseIdentifier: OVCellType.SwitchCell.rawValue)
         self.tableView.register(OVForwardCell.self, forCellReuseIdentifier: OVCellType.ForwardCell.rawValue)
@@ -32,6 +34,16 @@ class OVController: UITableViewController, ExStyleTableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func bindToModel() {
+        // Called when update is neccessary
+        model.bindView {
+            DispatchQueue.main.async {
+                self.setTitle(self.model.title)
+                self.updateVisibleCells()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,9 +52,10 @@ class OVController: UITableViewController, ExStyleTableViewController {
         var showEditButton: Bool = false
         
         for section in model.getSections() {
-            if section.getSectionType() == .Array {
+            if section.sectionType == .Array || section.sectionType == .Dictionary {
                 if section.removable || section.movable {
                     showEditButton = true
+                    break
                 }
             }
         }
@@ -57,12 +70,17 @@ class OVController: UITableViewController, ExStyleTableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //self.navigationItem.title = self.model.title
+        setTitle(self.model.title)
+        updateVisibleCells()
         
         model.onAppear?()
-        
-        setTitle(self.model.title)
-        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        model.onDisappear?()
+    }
+    
+    public func updateVisibleCells() {
         for cell in tableView.visibleCells {
             guard let castedCell = cell as? OVCellProtocol else {
                 continue
@@ -72,18 +90,14 @@ class OVController: UITableViewController, ExStyleTableViewController {
         }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        model.onDisappear?()
-    }
-    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.getSection(section).getHeader()
+        return model.getSection(section).header
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.getSection(section).getFooter()
+        return model.getSection(section).footer
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -93,13 +107,13 @@ class OVController: UITableViewController, ExStyleTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = model.getSection(section)
         let addRow = section.addable ? 1 : 0
-        return section.getCellCount() + addRow
+        return section.cellCount + addRow
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         let section = model.getSection(indexPath.section)
         
-        if indexPath.row >= section.getCellCount() {
+        if indexPath.row >= section.cellCount {
             // 'Add' Row
             return true
         }
@@ -110,7 +124,7 @@ class OVController: UITableViewController, ExStyleTableViewController {
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         let section = model.getSection(indexPath.section)
         
-        if indexPath.row >= section.getCellCount() {
+        if indexPath.row >= section.cellCount {
             // 'Add' Row
             return false
         }
@@ -123,7 +137,7 @@ class OVController: UITableViewController, ExStyleTableViewController {
         let section = model.getSection(indexPath.section)
         
         // 'Add' Cell
-        if indexPath.row >= section.getCellCount() {
+        if indexPath.row >= section.cellCount {
             return OVAddCell()
         }
         
@@ -156,48 +170,60 @@ class OVController: UITableViewController, ExStyleTableViewController {
             return
         }
         
-        let section = model.getSection(indexPath.section)
+        let sectionModel = model.getSection(indexPath.section)
         
-        if indexPath.row >= section.getCellCount() {
-            // Add a Row
-            section.addObject(at: indexPath.row)
-            tableView.insertRows(at: [indexPath], with: .fade)
+        if indexPath.row >= sectionModel.cellCount {
+            
+            selectedAddCell(sectionModel: sectionModel, indexPath: indexPath)
+            
         }
         
-        let cellModel = section.getCell(indexPath.row)
+        let cellModel = sectionModel.getCell(indexPath.row)
         
         if (cellModel.cellType == .ForwardCell) {
+            
             guard let castedModel = cellModel as? OVForwardCellModelProtocol else {
                 return
             }
             
-            if castedModel.enableLoading {
-                // Model for controller needs to load
-                
-                // Block other Forward cells
-                self.loadingForwardModel = true
-                
-                // Deselct...
-                tableView.deselectRow(at: indexPath, animated: true)
-                
-                DispatchQueue.global(qos: .userInteractive).async {
-                    let vc = OVController(castedModel.controller)
-                    
-                    DispatchQueue.main.async {
-                        self.loadingForwardModel = false
-                        
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-            } else {
-                // Model for controller can build instant
-                let vc = OVController(castedModel.controller)
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+            selectedForwardCell(cellModel: castedModel, indexPath: indexPath)
             
         } else {
+            
             tableView.deselectRow(at: indexPath, animated: true)
         }
+    }
+    
+    private func selectedForwardCell(cellModel: OVForwardCellModelProtocol, indexPath: IndexPath) {
+        if cellModel.enableLoading {
+            // Model for controller needs to load
+            
+            // Block other Forward cells
+            self.loadingForwardModel = true
+            
+            // Deselct...
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            DispatchQueue.global(qos: .userInteractive).async {
+                let vc = OVController(cellModel.controller)
+                
+                DispatchQueue.main.async {
+                    self.loadingForwardModel = false
+                    
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        } else {
+            // Model for controller can build instant
+            let vc = OVController(cellModel.controller)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    private func selectedAddCell(sectionModel: OVSectionModelProtocol, indexPath: IndexPath) {
+        // Add a Row
+        sectionModel.addObject(at: indexPath.row)
+        tableView.insertRows(at: [indexPath], with: .fade)
     }
     
     // Move
@@ -236,7 +262,7 @@ class OVController: UITableViewController, ExStyleTableViewController {
         let section = model.getSection(indexPath.section)
         
         if editingStyle == .delete {
-            if section.getCellCount() == 1 && section.keepOne {
+            if section.cellCount == 1 && section.keepOne {
                 return
             }
             
@@ -255,7 +281,7 @@ class OVController: UITableViewController, ExStyleTableViewController {
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath)
         -> UITableViewCell.EditingStyle {
             
-        if indexPath.row >= model.getSection(indexPath.section).getCellCount() {
+        if indexPath.row >= model.getSection(indexPath.section).cellCount {
             return .insert
         } else {
             return .delete

@@ -8,7 +8,9 @@
 
 import UIKit
 
-internal protocol OVCellProtocol {
+public protocol OVCellProtocol {
+    
     func setup(_ model: OVCellModelProtocol)
     func update()
+    
 }

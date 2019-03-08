@@ -48,12 +48,23 @@ class OVActionCell: UITableViewCell, OVCellProtocol, ExStyleTableViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        /*guard let connectedCell = self.model.connectedCell else {
+            return
+        }
+        
+        if connectedCell === (self as OVCellProtocol) {
+            self.model.connectedCell = nil
+        }*/
+    }
+    
     func setup(_ model: OVCellModelProtocol) {
         guard let m = model as? OVActionCellModelProtocol else {
             fatalError("OVActionCell: Cant cast model")
         }
         
         self.model = m
+        self.model.connectedCell = self
         
         setupCell()
     }

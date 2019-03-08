@@ -12,7 +12,7 @@ internal protocol OVForwardCellModelProtocol: OVCellModelProtocol {
     
     var controller: OVControllerModelProtocol { get }
     
-    var statusUpdate: ((_ state: String?, _ spinner: Bool)->())? { get set }
+    var statusUpdate: ((_ title: String?, _ subtitle: String?, _ spinner: Bool)->())? { get set }
     
     var enableLoading: Bool { get }
     
@@ -25,11 +25,12 @@ extension OVForwardCellModelProtocol {
         }
     }
     
-    var statusUpdate: ((_ state: String?, _ spinner: Bool)->())? {
+    var statusUpdate: ((_ title: String?, _ subtitle: String?, _ spinner: Bool)->())? {
         get {
             return nil
         }
         set {
+            
         }
     }
 }

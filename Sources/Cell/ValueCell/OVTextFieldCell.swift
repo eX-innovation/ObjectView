@@ -49,6 +49,7 @@ internal class OVTextFieldCell: UITableViewCell, OVCellProtocol, ExStyleTableVie
         }
         
         self.model = m
+        self.model.connectedCell = self
         
         setupCell()
         updateCell()

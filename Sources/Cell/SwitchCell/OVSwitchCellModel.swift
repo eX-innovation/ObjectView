@@ -11,52 +11,66 @@ import UIKit
 
 public class OVSwitchCellModel<ObjectType>: OVSwitchCellModelProtocol {
     
+    ///Properties
     public let cellType: OVCellType = .SwitchCell
     
     public let object: ObjectType
     
-    private let placeholderResolver: OVResolvePlaceholder<ObjectType>
-    
     private let _title: () -> Any
-    public var title: String {
-        return placeholderResolver.resolve("\(_title())")
-    }
-    
     private let _subtitle: () -> Any
-    public var subtitle: String {
-        return placeholderResolver.resolve("\(_subtitle())")
-    }
+    
+    private let onUpdate: (()->())?
     
     internal let keyPathWrapper: OVKeyPathWrapper<ObjectType, Bool>
+    
+    /// Reference to cell
+    public var connectedCell: OVCellProtocol?
+    
+    var _value: Bool = false
     
     public init(
         _ object: ObjectType,
         _ path: ReferenceWritableKeyPath<ObjectType, Bool>,
         _ title: @escaping @autoclosure () -> Any,
         subtitle: @escaping @autoclosure () -> Any = "",
-        placeholder: Dictionary<String, PartialKeyPath<ObjectType>> = [:]) {
+        onUpdate: (()->())? = nil) {
         
         self.object = object
         
-        self.placeholderResolver = OVResolvePlaceholder(placeholder, object)
+        //self.placeholderResolver = OVResolvePlaceholder(placeholder, object)
         self._title = title
         self._subtitle = subtitle
+        
+        self.onUpdate = onUpdate
         
         self.keyPathWrapper = OVKeyPathWrapper(path)
         self.keyPathWrapper.setObject(object)
     }
     
-    var _value: Bool = false
+    /// Computed properties
+    public var title: String {
+        return "\(_title())"
+    }
     
-    var value: Bool {
+    public var subtitle: String {
+        return "\(_subtitle())"
+    }
+    
+    internal var value: Bool {
         set {
             _value = newValue
             self.keyPathWrapper.setValue(_value)
+            onUpdate?()
         }
         
         get {
             _value = self.keyPathWrapper.getValue()
             return _value
         }
+    }
+    
+    /// Methods
+    public func updateAll() {
+        connectedCell?.update()
     }
 }

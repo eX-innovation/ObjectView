@@ -10,11 +10,10 @@ import UIKit
 
 internal protocol OVValueCellModelProtocol: OVCellModelProtocol {
     
-    var value: String { get set }
-    
+    var allowCustomInput: Bool { get }
     var keyboardType: UIKeyboardType { get }
     
-    var pickerValues: (() -> (Array<String>))? { get }
+    var value: String { get set }
     
-    var allowCustomInput: Bool { get }
+    var pickerValues: (() -> (Array<String>))? { get }
 }

@@ -47,6 +47,7 @@ class OVPickerCell: UITableViewCell, OVCellProtocol, ExStyleTableViewCell {
         }
         
         self.model = m
+        self.model.connectedCell = self
         
         setupCell()
         updateCell()
